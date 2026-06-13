@@ -1,0 +1,511 @@
+{
+  "event": {
+    "window": {
+      "start": "2026-04-19T00:50:00Z",
+      "end": "2026-04-19T00:55:00Z",
+      "configured_window_seconds": 300,
+      "observed_span_seconds": 244,
+      "event_count": 1539,
+      "aggregated_record_count": 1777,
+      "flush_reason": "idle_timeout",
+      "first_observed_at": "2026-04-19T00:50:07.708248Z",
+      "last_observed_at": "2026-04-19T00:54:11.084655Z"
+    },
+    "event_time_range": {
+      "start": "2026-04-19T00:39:49Z",
+      "end": "2026-04-19T00:52:11.186000Z"
+    },
+    "dominant_log_type": "waf",
+    "dominant_action": "block",
+    "log_type_counts": {
+      "waf": 1065,
+      "vpc": 712
+    },
+    "action_counts": {
+      "block": 1029,
+      "accept": 618,
+      "reject": 94,
+      "allow": 36
+    },
+    "top_source_ips": [
+      {
+        "ip": "75.119.154.122",
+        "count": 1022
+      },
+      {
+        "ip": "10.141.158.148",
+        "count": 223
+      },
+      {
+        "ip": "10.148.44.126",
+        "count": 65
+      },
+      {
+        "ip": "10.141.10.250",
+        "count": 52
+      },
+      {
+        "ip": "10.148.29.1",
+        "count": 41
+      },
+      {
+        "ip": "10.148.39.86",
+        "count": 26
+      },
+      {
+        "ip": "10.141.15.37",
+        "count": 16
+      },
+      {
+        "ip": "10.148.60.188",
+        "count": 14
+      },
+      {
+        "ip": "10.148.62.197",
+        "count": 14
+      },
+      {
+        "ip": "10.148.37.118",
+        "count": 12
+      }
+    ],
+    "top_destination_ips": [
+      {
+        "ip": "13.228.187.171",
+        "count": 1024
+      },
+      {
+        "ip": "10.141.158.148",
+        "count": 223
+      },
+      {
+        "ip": "10.141.10.250",
+        "count": 146
+      },
+      {
+        "ip": "10.141.1.64",
+        "count": 68
+      },
+      {
+        "ip": "10.148.44.126",
+        "count": 65
+      },
+      {
+        "ip": "10.148.29.1",
+        "count": 41
+      },
+      {
+        "ip": "10.148.39.86",
+        "count": 26
+      },
+      {
+        "ip": "10.141.15.37",
+        "count": 16
+      },
+      {
+        "ip": "10.148.60.188",
+        "count": 14
+      },
+      {
+        "ip": "10.148.62.197",
+        "count": 14
+      }
+    ],
+    "top_groups": [
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.29.1|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.29.1",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 31,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.29.1 10.141.158.148 45728 5432 6 17 2989 1776559767 1776559801 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.44.126|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.44.126",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 30,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.44.126 10.141.158.148 21308 5432 6 19 3229 1776559767 1776559801 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.44.126|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.44.126",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 23,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.44.126 10.141.158.148 36230 5432 6 19 3229 1776559651 1776559681 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.39.86|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.39.86",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 14,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.39.86 10.141.158.148 53813 5432 6 17 2989 1776559651 1776559681 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.62.197|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.62.197",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 14,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.62.197 10.141.158.148 3913 5432 6 18 4774 1776559829 1776559861 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.39.86|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.39.86",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 12,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.39.86 10.141.158.148 12575 5432 6 17 2989 1776559591 1776559621 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.44.126|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.44.126",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 12,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.44.126 10.141.158.148 4965 5432 6 18 3177 1776559591 1776559621 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.29.1|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.29.1",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 10,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.29.1 10.141.158.148 39105 5432 6 18 3041 1776559679 1776559714 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.60.188|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.60.188",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 9,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.60.188 10.141.158.148 41503 5432 6 18 2900 1776559767 1776559801 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0408c975a0b599e0f|10.141.10.250|10.141.15.37|443|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.141.10.250",
+        "dst_ip": "10.141.15.37",
+        "destination_port": 443,
+        "protocol": "TCP",
+        "count": 8,
+        "sample_message": "2 041550429462 eni-0408c975a0b599e0f 10.141.10.250 10.141.15.37 41358 443 6 79 68802 1776559667 1776559721 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.37.118|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.37.118",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 7,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.37.118 10.141.158.148 2195 5432 6 20 3644 1776559767 1776559801 ACCEPT OK"
+      },
+      {
+        "group_key": "vpc|eni-0039c0787d24c2c1b|10.148.30.221|10.141.158.148|5432|TCP|accept",
+        "log_type": "vpc",
+        "action": "accept",
+        "method": null,
+        "uri": null,
+        "rule_id": null,
+        "reason": null,
+        "src_ip": "10.148.30.221",
+        "dst_ip": "10.141.158.148",
+        "destination_port": 5432,
+        "protocol": "TCP",
+        "count": 5,
+        "sample_message": "2 041550429462 eni-0039c0787d24c2c1b 10.148.30.221 10.141.158.148 33397 5432 6 20 3644 1776559793 1776559832 ACCEPT OK"
+      }
+    ],
+    "notable_patterns": {
+      "external_to_private_sensitive": [
+        {
+          "group_key": "vpc|eni-060589702cf9f079c|61.107.201.84|10.141.1.64|6379|TCP|accept",
+          "log_type": "vpc",
+          "action": "accept",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "61.107.201.84",
+          "dst_ip": "10.141.1.64",
+          "destination_port": 6379,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-060589702cf9f079c 61.107.201.84 10.141.1.64 41036 6379 6 1 60 1776559706 1776559774 ACCEPT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|61.107.201.84|10.141.10.250|6379|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "61.107.201.84",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 6379,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 61.107.201.84 10.141.10.250 42464 6379 6 1 60 1776559667 1776559721 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|118.196.87.226|10.141.10.250|6379|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "118.196.87.226",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 6379,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 118.196.87.226 10.141.10.250 47044 6379 6 1 60 1776559723 1776559781 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|68.183.234.194|10.141.10.250|2222|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "68.183.234.194",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 2222,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 68.183.234.194 10.141.10.250 47595 2222 6 2 80 1776559365 1776559421 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|180.76.52.82|10.141.10.250|6379|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "180.76.52.82",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 6379,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 180.76.52.82 10.141.10.250 34540 6379 6 1 60 1776559427 1776559481 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|134.209.240.74|10.141.10.250|2222|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "134.209.240.74",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 2222,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 134.209.240.74 10.141.10.250 34602 2222 6 1 52 1776559485 1776559541 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|81.198.11.136|10.141.10.250|2222|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "81.198.11.136",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 2222,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 81.198.11.136 10.141.10.250 36818 2222 6 3 180 1776559545 1776559601 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|81.198.11.136|10.141.10.250|22|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "81.198.11.136",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 22,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 81.198.11.136 10.141.10.250 38670 22 6 3 180 1776559545 1776559601 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-0408c975a0b599e0f|165.232.74.249|10.141.10.250|10022|TCP|reject",
+          "log_type": "vpc",
+          "action": "reject",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "165.232.74.249",
+          "dst_ip": "10.141.10.250",
+          "destination_port": 10022,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-0408c975a0b599e0f 165.232.74.249 10.141.10.250 46458 10022 6 1 40 1776559607 1776559661 REJECT OK"
+        },
+        {
+          "group_key": "vpc|eni-060589702cf9f079c|118.196.87.226|10.141.1.64|6379|TCP|accept",
+          "log_type": "vpc",
+          "action": "accept",
+          "method": null,
+          "uri": null,
+          "rule_id": null,
+          "reason": null,
+          "src_ip": "118.196.87.226",
+          "dst_ip": "10.141.1.64",
+          "destination_port": 6379,
+          "protocol": "TCP",
+          "count": 1,
+          "sample_message": "2 041550429462 eni-060589702cf9f079c 118.196.87.226 10.141.1.64 43764 6379 6 1 60 1776559747 1776559807 ACCEPT OK"
+        }
+      ]
+    },
+    "historical_correlation": {
+      "lookback_seconds": 3600,
+      "correlation_key": "waf|accept|-|-|-",
+      "primary_target": "- -",
+      "dominant_log_type": "waf",
+      "matching_windows_last_hour": 2,
+      "consecutive_matching_windows": 2,
+      "continuous_minutes": 10,
+      "aggregated_records_last_hour": 2953,
+      "unique_source_ip_count_last_hour": 12,
+      "severity_signal": "short_recurrence",
+      "is_isolated_window": false
+    }
+  },
+  "analysis": {
+    "should_alert": true,
+    "severity": "medium",
+    "confidence": 85,
+    "category": "waf_block_rate_anomaly",
+    "title": "High volume blocked traffic from 75.119.154.122 to 13.228.187.171",
+    "summary": "A large number of WAF block events (1022) from a single external IP targeting a public endpoint were observed, recurring across two consecutive 5‑minute windows (10 minutes total) in the last hour.",
+    "reasoning": "The dominant log type is WAF with a sustained block pattern from the same source IP over multiple windows, indicating a potential automated attack. Although no service impact is reported, the recurrence and volume exceed baseline, warranting a medium‑severity alert.",
+    "recommended_actions": [
+      "Review WAF rule set for the targeted endpoint and confirm it is appropriately blocking malicious traffic",
+      "Investigate the source IP reputation and consider temporary IP block or rate‑limit",
+      "Check application logs for any signs of bypass or impact",
+      "Monitor for continued activity in subsequent windows"
+    ],
+    "dedup_key": "waf_block_75.119.154.122_13.228.187.171"
+  },
+  "usage": {
+    "request": {
+      "model": "openai/gpt-oss-120b",
+      "attempts": 1,
+      "successful_calls": 1,
+      "failed_calls": 0,
+      "prompt_tokens": 11012,
+      "cached_tokens": 0,
+      "completion_tokens": 370,
+      "total_tokens": 11382,
+      "input_cost_usd": 0.0016518,
+      "cached_input_cost_usd": 0,
+      "output_cost_usd": 0.00022199999999999998,
+      "total_cost_usd": 0.0018738
+    },
+    "daily": {
+      "date": "2026-04-19",
+      "calls": 17,
+      "successful_calls": 15,
+      "failed_calls": 2,
+      "prompt_tokens": 135304,
+      "cached_tokens": 26624,
+      "completion_tokens": 3978,
+      "total_tokens": 139282,
+      "input_cost_usd": 0.016301999999999997,
+      "cached_input_cost_usd": 0.0019968,
+      "output_cost_usd": 0.0023868,
+      "total_cost_usd": 0.0206856
+    }
+  },
+  "created_at": "2026-04-19T00:55:08.060399Z"
+}

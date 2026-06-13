@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentinelX — SOC SIEM Dashboard</title>
+  <meta name="description" content="Enterprise Security Information and Event Management Dashboard">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon"><i class="fas fa-shield-halved"></i></div>
+      <span class="brand-text">SentinelX</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <i class="fas fa-th-large"></i><span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="alerts">
+        <i class="fas fa-bell"></i><span>Alerts</span>
+      </a>
+      <a href="#" class="nav-item" data-page="incidents">
+        <i class="fas fa-exclamation-triangle"></i><span>Incidents</span>
+      </a>
+      <a href="#" class="nav-item" data-page="logs">
+        <i class="fas fa-scroll"></i><span>Logs</span>
+      </a>
+      <a href="#" class="nav-item" data-page="threat-intel">
+        <i class="fas fa-crosshairs"></i><span>Threat Intel</span>
+      </a>
+      <a href="#" class="nav-item" data-page="users">
+        <i class="fas fa-users"></i><span>Users</span>
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item" data-page="settings">
+        <i class="fas fa-cog"></i><span>Settings</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="status-badge operational"><i class="fas fa-circle"></i> System: Operational</span>
+      </div>
+      <div class="topbar-center">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search logs, IPs, hashes..." id="global-search">
+          <kbd>⌘K</kbd>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="time-range-selector">
+          <i class="fas fa-clock"></i>
+          <select id="time-range">
+            <option>Last 24 Hours</option>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+            <option>Custom Range</option>
+          </select>
+        </div>
+        <button class="topbar-btn notification-btn" id="notification-bell">
+          <i class="fas fa-bell"></i>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="topbar-avatar">
+          <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23334155'/%3E%3Ctext x='20' y='25' text-anchor='middle' fill='%2394a3b8' font-size='16'%3EA%3C/text%3E%3C/svg%3E"
+            alt="User">
+        </div>
+      </div>
+    </header>
+
+    <!-- Page: Dashboard -->
+    <section id="page-dashboard" class="page active">
+      <!-- Stat Cards Row -->
+      <div class="stat-cards-row">
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">ACTIVE ALERTS</span>
+            <div class="stat-spark" id="spark-alerts"></div>
+          </div>
+          <div class="stat-value red">28</div>
+          <div class="stat-change negative"><i class="fas fa-arrow-up"></i> 12% from last hour</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">DATA INGEST (GB)</span>
+            <div class="stat-spark" id="spark-ingest"></div>
+          </div>
+          <div class="stat-value">1,402</div>
+          <div class="stat-change positive"><i class="fas fa-arrow-up"></i> 8% from yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">BLOCKED IPS</span>
+            <div class="stat-spark" id="spark-blocked"></div>
+          </div>
+          <div class="stat-value orange">8,901</div>
+          <div class="stat-change negative"><i class="fas fa-arrow-up"></i> 23% from last hour</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">ANOMALIES</span>
+            <div class="stat-spark" id="spark-anomalies"></div>
+          </div>
+          <div class="stat-value">14</div>
+          <div class="stat-change neutral"><i class="fas fa-minus"></i> No change</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">INCIDENTS</span>
+            <div class="stat-spark" id="spark-incidents"></div>
+          </div>
+          <div class="stat-value">5,402</div>
+          <div class="stat-change positive"><i class="fas fa-arrow-down"></i> 5% from yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">MTTR (MIN)</span>
+            <div class="stat-spark" id="spark-mttr"></div>
+          </div>
+          <div class="stat-value green">342</div>
+          <div class="stat-change positive"><i class="fas fa-arrow-down"></i> 15% improvement</div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="widget-card chart-wide">
+          <div class="widget-header">
+            <h3>Network Throughput (Gbps)</h3>
+            <div class="chart-legend-inline">
+              <span class="legend-dot blue"></span> Inbound <strong>85.26</strong>
+              <span class="legend-dot orange"></span> Outbound <strong>32.16</strong>
+            </div>
+          </div>
+          <div class="chart-container" style="height:180px">
+            <canvas id="chart-throughput"></canvas>
+          </div>
+          <div class="chart-time-labels">
+            <span>-60m</span><span>-45m</span><span>-30m</span><span>-15m</span><span>Now</span></div>
+        </div>
+        <div class="widget-card">
+          <div class="widget-header">
+            <h3>Incident Distribution</h3>
+          </div>
+          <div class="chart-container donut-container">
+            <canvas id="chart-incidents-donut"></canvas>
+            <div class="donut-legend">
+              <div><span class="legend-dot cyan"></span> Policy Violations (40%)</div>
+              <div><span class="legend-dot purple"></span> Malware (32%)</div>
+              <div><span class="legend-dot orange"></span> Intrusions (20%)</div>
+              <div><span class="legend-dot green"></span> Anomalies (8%)</div>
+            </div>
+          </div>
+        </div>
+        <div class="widget-card">
+          <div class="widget-header">
+            <h3>Auth Failures (7D x 24H)</h3>
+          </div>
+          <div class="heatmap-container" id="heatmap-auth"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Table + Right Widgets -->
+      <div class="bottom-row">
+        <div class="widget-card table-wide">
+          <div class="widget-header">
+            <h3>Real-Time Security Events <span class="live-badge">Live</span></h3>
+            <div class="table-actions">
+              <div class="filter-chip"><i class="fas fa-filter"></i> Filter: action="Blocked"</div>
+              <button class="icon-btn"><i class="fas fa-download"></i></button>
+            </div>
+          </div>
+          <div class="events-table-wrap">
+            <table class="events-table" id="events-table">
+              <thead>
+                <tr>
+                  <th>TIME</th>
+                  <th>SEV</th>
+                  <th>SOURCE IP:PORT</th>
+                  <th>DEST IP:PORT</th>
+                  <th>PROTO</th>
+                  <th>TACTIC</th>
+                  <th>ACTION</th>
+                  <th>INVESTIGATE</th>
+                </tr>
+              </thead>
+              <tbody id="events-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="right-widgets">
+          <div class="widget-card">
+            <div class="widget-header">
+              <h3>Top Blocked Subnets</h3>
+            </div>
+            <div class="subnet-list" id="subnet-list"></div>
+          </div>
+          <div class="widget-card">
+            <div class="widget-header">
+              <h3>Detection Timelines</h3>
+            </div>
+            <div class="timeline-bars" id="detection-timelines"></div>
+            <div class="timeline-axis"><span>-24h</span><span>-12h</span><span>Now</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page: Alerts -->
+    <section id="page-alerts" class="page">
+      <div class="alerts-layout">
+        <div class="alerts-main">
+          <div class="widget-card">
+            <div class="widget-header">
+              <h3>Investigation Timeline</h3>
+              <div class="tab-group">
+                <button class="tab active">1H</button>
+                <button class="tab">24H</button>
+                <button class="tab">7D</button>
+              </div>
+            </div>
+            <div class="chart-container" style="height:160px">
+              <canvas id="chart-investigation"></canvas>
+            </div>
+          </div>
+          <div class="widget-card">
+            <div class="widget-header">
+              <h3>Active Alert Stream</h3>
+              <div class="table-actions">
+                <div class="filter-chip"><i class="fas fa-filter"></i> Filter: action="Blocked"</div>
+                <button class="icon-btn"><i class="fas fa-download"></i></button>
+              </div>
+            </div>
+            <div class="events-table-wrap">
+              <table class="events-table" id="alerts-table">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    <th>SEV</th>
+                    <th>SOURCE IP:PORT</th>
+                    <th>DEST IP:PORT</th>
+                    <th>PROTO</th>
+                    <th>TACTIC</th>
+                    <th>ACTION</th>
+                    <th>INVESTIGATE</th>
+                  </tr>
+                </thead>
+                <tbody id="alerts-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="alerts-sidebar">
+          <div class="widget-card">
+            <div class="widget-header">
+              <h3>Entity Context</h3>
+            </div>
+            <div class="entity-context">
+              <div class="entity-field"><span class="field-label">Source IP</span><span
+                  class="field-value mono">192.168.1.104</span></div>
+              <div class="entity-field"><span class="field-label">Hostname</span><span
+                  class="field-value">WS-PC0142</span></div>
+              <div class="entity-field"><span class="field-label">User</span><span
+                  class="field-value">jdoe@corp.local</span></div>
+              <div class="entity-field"><span class="field-label">Department</span><span
+                  class="field-value">Engineering</span></div>
+              <div class="entity-field"><span class="field-label">Risk Score</span><span
+                  class="field-value risk-high">87/100</span></div>
+              <div class="entity-field"><span class="field-label">Geo</span><span class="field-value">US — New
+                  York</span></div>
+              <div class="entity-sep"></div>
+              <h4>MITRE ATT&CK Mapping</h4>
+              <div class="mitre-tags">
+                <span class="mitre-tag">T1078 — Valid Accounts</span>
+                <span class="mitre-tag">T1110 — Brute Force</span>
+                <span class="mitre-tag">T1021 — Remote Services</span>
+              </div>
+              <div class="entity-sep"></div>
+              <h4>Correlated Events</h4>
+              <div class="correlated-events">
+                <div class="corr-event"><span class="sev-dot crit"></span> Failed RDP x23 <span
+                    class="corr-time">-2h</span></div>
+                <div class="corr-event"><span class="sev-dot high"></span> Privilege Escalation <span
+                    class="corr-time">-1h</span></div>
+                <div class="corr-event"><span class="sev-dot med"></span> Lateral Movement <span
+                    class="corr-time">-30m</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page: Incidents -->
+    <section id="page-incidents" class="page">
+      <div class="incident-header">
+        <div class="incident-title-row">
+          <h2><span class="incident-id">INC-2024-0847</span> Possible Brute Force leading to Privilege Escalation</h2>
+          <div class="incident-badges">
+            <span class="sev-badge critical">CRITICAL</span>
+            <span class="status-pill open">OPEN</span>
+          </div>
+        </div>
+        <div class="incident-tabs">
+          <button class="tab active">Attack Timeline</button>
+          <button class="tab">Overview</button>
+          <button class="tab">Log & Evidence</button>
+          <button class="tab">MITRE ATT&CK</button>
+          <button class="tab">Attack Chain</button>
+          <button class="tab">Notes (3)</button>
+          <button class="tab">Setting Context</button>
+        </div>
+      </div>
+      <div class="incident-layout">
+        <div class="incident-col timeline-col">
+          <div class="widget-card">
+            <h3>Attack Timeline</h3>
+            <div class="attack-timeline">
+              <div class="timeline-item critical">
+                <div class="tl-marker"></div>
+                <div class="tl-content">
+                  <div class="tl-time">08:14 AM</div>
+                  <div class="tl-title"><i class="fas fa-crosshairs"></i> Port Scan Detected</div>
+                  <div class="tl-detail">Target: 10.0.0.5 ports 22,80,443,3389,445</div>
+                </div>
+              </div>
+              <div class="timeline-item high">
+                <div class="tl-marker"></div>
+                <div class="tl-content">
+                  <div class="tl-time">08:27 AM</div>
+                  <div class="tl-title"><i class="fas fa-key"></i> Multiple Failed Logins</div>
+                  <div class="tl-detail">45 failed SSH attempts from 192.168.1.104</div>
+                </div>
+              </div>
+              <div class="timeline-item medium">
+                <div class="tl-marker"></div>
+                <div class="tl-content">
+                  <div class="tl-time">08:42 AM</div>
+                  <div class="tl-title"><i class="fas fa-check-circle"></i> Successful Login</div>
+                  <div class="tl-detail">SSH auth success — user: admin</div>
+                </div>
+              </div>
+              <div class="timeline-item critical">
+                <div class="tl-marker"></div>
+                <div class="tl-content">
+                  <div class="tl-time">08:45 AM</div>
+                  <div class="tl-title"><i class="fas fa-arrow-up"></i> Suspicious Process</div>
+                  <div class="tl-detail">sudo -i with a root priv. escalg.</div>
+                </div>
+              </div>
+              <div class="timeline-item critical">
+                <div class="tl-marker"></div>
+                <div class="tl-content">
+                  <div class="tl-time">09:01 AM</div>
+                  <div class="tl-title"><i class="fas fa-upload"></i> Data Exfil Attempt</div>
+                  <div class="tl-detail">Large outbound transfer to 198.51.100.23:443</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="incident-col detail-col">
+          <div class="widget-card">
+            <h3>AI Incident Summary & Auto-Correlation</h3>
+            <div class="ai-summary">
+              <p>A brute-force SSH attack originating from 192.168.1.104 was followed by 1 successful login to target
+                10.0.0.5 and rapid root privilege escalation. After a successful brute-force, the attacker performed
+                lateral movement and attempted data exfiltration via encrypted channel to 198.51.100.23.</p>
+            </div>
+            <div class="entity-graph-mini">
+              <div class="graph-node src">DB-Prod-01</div>
+              <div class="graph-edge"><span>Hash (Lateral)</span></div>
+              <div class="graph-nodes-group">
+                <div class="graph-node dst">10.0.0.5</div>
+                <div class="graph-node dst">10.0.0.12</div>
+              </div>
+            </div>
+            <div class="detected-tactics">
+              <h4>DETECTED TACTICS</h4>
+              <div class="mitre-tags">
+                <span class="mitre-tag tactic">Brute Force</span>
+                <span class="mitre-tag tactic">Priv Escalation</span>
+              </div>
+            </div>
+          </div>
+          <div class="widget-card">
+            <h3>Log Evidence (Event ID: SuccessfulLogin)</h3>
+            <div class="log-evidence">
+              <pre class="log-block"><code>"timestamp": "2024-01-15T08:42:13.2452"
+"source_ip": "192.168.1.104"
+"event_type": "authentication"
+"status": "success"
+"username": "admin"
+"method": "SSH"
+"hostname": "DB-Prod-01"
+"session_id": "sess-8f2a-4b1c"
+"privilege_level": "root"
+"command": "sudo -i"
+"destination": "198.51.100.23:443"
+"bytes_transferred": 2847391
+"protocol": "TLS 1.3"
+"risk_score": 94</code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="incident-col context-col">
+          <div class="widget-card">
+            <h3>Playbook Status</h3>
+            <div class="playbook-steps">
+              <div class="pb-step done"><i class="fas fa-check-circle"></i> Auto-Containment v2 <span
+                  class="pb-status running">Running</span></div>
+              <div class="pb-step done"><i class="fas fa-check-circle"></i> Isolate HTTP/S sessions.exe</div>
+              <div class="pb-step done"><i class="fas fa-check-circle"></i> Block src IP on perimeter FW</div>
+              <div class="pb-step pending"><i class="fas fa-circle"></i> Notify SOC L2 Analyst</div>
+              <div class="pb-step pending"><i class="fas fa-circle"></i> Snapshot forensic image</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page: Logs -->
+    <section id="page-logs" class="page">
+      <div class="logs-layout">
+        <div class="logs-fields-panel">
+          <h3>Available Fields</h3>
+          <div class="field-search"><input type="text" placeholder="Filter fields..."></div>
+          <ul class="field-list">
+            <li class="field-item"><span class="field-icon">T</span> source_ip</li>
+            <li class="field-item"><span class="field-icon">T</span> dest_ip</li>
+            <li class="field-item"><span class="field-icon">#</span> Event ID</li>
+            <li class="field-item"><span class="field-icon">T</span> @Hostname</li>
+            <li class="field-item"><span class="field-icon">#</span> dest_port</li>
+            <li class="field-item"><span class="field-icon">T</span> Data Source</li>
+            <li class="field-item"><span class="field-icon">T</span> action</li>
+            <li class="field-item"><span class="field-icon">#</span> AuditJun</li>
+            <li class="field-item"><span class="field-icon">T</span> MalType</li>
+            <li class="field-item"><span class="field-icon">T</span> Exfiltration</li>
+          </ul>
+        </div>
+        <div class="logs-main">
+          <div class="logs-query-bar">
+            <div class="query-input-wrap">
+              <i class="fas fa-terminal"></i>
+              <input type="text" placeholder='Event ID 4625 AND @host:"DC01.corp"' class="query-input" id="log-query">
+            </div>
+            <div class="query-controls">
+              <select class="time-select">
+                <option>Last 24 Hours</option>
+              </select>
+              <button class="btn-primary">Search</button>
+            </div>
+          </div>
+          <div class="logs-chart-row">
+            <div class="widget-card">
+              <div class="chart-container" style="height:120px">
+                <canvas id="chart-log-volume"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="widget-card">
+            <div class="events-table-wrap">
+              <table class="events-table" id="logs-table">
+                <thead>
+                  <tr>
+                    <th>TIMESTAMP</th>
+                    <th>SOURCE</th>
+                    <th>EVENT TYPE</th>
+                    <th>ACTION</th>
+                    <th>SEVERITY</th>
+                    <th>DETAILS</th>
+                  </tr>
+                </thead>
+                <tbody id="logs-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="logs-detail-panel">
+          <h3>Log Details</h3>
+          <div class="log-detail-content">
+            <div class="detail-field"><span class="df-label">Timestamp</span><span class="df-value mono">2024-01-15
+                08:42:13</span></div>
+            <div class="detail-field"><span class="df-label">Source IP</span><span
+                class="df-value mono">192.168.1.104</span></div>
+            <div class="detail-field"><span class="df-label">Dest IP</span><span class="df-value mono">10.0.0.5</span>
+            </div>
+            <div class="detail-field"><span class="df-label">Event Type</span><span
+                class="df-value">Authentication</span></div>
+            <div class="detail-field"><span class="df-label">Action</span><span
+                class="df-value action-blocked">Blocked</span></div>
+            <div class="detail-field"><span class="df-label">Severity</span><span class="df-value"><span
+                  class="sev-badge high-sm">HIGH</span></span></div>
+            <div class="entity-sep"></div>
+            <h4>AI Suggestion</h4>
+            <div class="ai-suggestion">
+              <p><i class="fas fa-robot"></i> This event correlates with 23 other failed login attempts from the same
+                source in the last 2 hours. Recommend blocking at perimeter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page: Executive Summary -->
+    <section id="page-executive" class="page">
+      <div class="exec-top-row">
+        <div class="widget-card risk-gauge-card">
+          <div class="widget-header">
+            <h3>Global Risk Score</h3>
+          </div>
+          <div class="risk-gauge-wrap">
+            <canvas id="chart-risk-gauge"></canvas>
+            <div class="risk-score-value">75</div>
+          </div>
+          <div class="risk-label">HIGH RISK</div>
+        </div>
+        <div class="exec-kpis">
+          <div class="kpi-card">
+            <div class="kpi-label">INCIDENTS</div>
+            <div class="kpi-value">162</div>
+            <div class="kpi-sub">Last 30 days</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">MTTR</div>
+            <div class="kpi-value">4.2<span class="kpi-unit">hrs</span></div>
+            <div class="kpi-sub">Avg resolution time</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">SLA MET</div>
+            <div class="kpi-value green">51<span class="kpi-unit">%</span></div>
+            <div class="kpi-sub">Target: 95%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">FALSE POSITIVE</div>
+            <div class="kpi-value">88.5<span class="kpi-unit">%</span></div>
+            <div class="kpi-sub">Detection accuracy</div>
+          </div>
+        </div>
+      </div>
+      <div class="widget-card">
+        <div class="widget-header">
+          <h3>30-Day Incident Volume Trend</h3>
+        </div>
+        <div class="chart-container" style="height:200px">
+          <canvas id="chart-exec-volume"></canvas>
+        </div>
+      </div>
+      <div class="exec-bottom-row">
+        <div class="widget-card">
+          <div class="widget-header">
+            <h3>Incidents by Category</h3>
+          </div>
+          <div class="category-bars" id="category-bars"></div>
+        </div>
+        <div class="widget-card">
+          <div class="widget-header">
+            <h3>Compliance & Frameworks</h3>
+          </div>
+          <div class="compliance-grid" id="compliance-grid"></div>
+        </div>
+      </div>
+      <div class="exec-bottom-row">
+        <div class="widget-card">
+          <div class="widget-header">
+            <h3>Targeted Asset Groups</h3>
+          </div>
+          <div class="asset-list">
+            <div class="asset-row"><span>Domain Controllers</span><span class="asset-count crit">847</span></div>
+            <div class="asset-row"><span>Web Servers (DMZ)</span><span class="asset-count high">623</span></div>
+            <div class="asset-row"><span>Database Servers</span><span class="asset-count med">412</span></div>
+            <div class="asset-row"><span>Endpoint Workstations</span><span class="asset-count low">289</span></div>
+            <div class="asset-row"><span>Cloud Infrastructure</span><span class="asset-count info">156</span></div>
+          </div>
+        </div>
+        <div class="widget-card">
+          <div class="widget-header">
+            <h3>Geographic Distribution</h3>
+          </div>
+          <div class="geo-list">
+            <div class="geo-row"><span class="geo-flag">🇺🇸</span><span>United States</span><span
+                class="geo-pct">34%</span></div>
+            <div class="geo-row"><span class="geo-flag">🇨🇳</span><span>China</span><span class="geo-pct">22%</span>
+            </div>
+            <div class="geo-row"><span class="geo-flag">🇷🇺</span><span>Russia</span><span class="geo-pct">18%</span>
+            </div>
+            <div class="geo-row"><span class="geo-flag">🇮🇷</span><span>Iran</span><span class="geo-pct">11%</span>
+            </div>
+            <div class="geo-row"><span class="geo-flag">🇰🇵</span><span>North Korea</span><span
+                class="geo-pct">8%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
